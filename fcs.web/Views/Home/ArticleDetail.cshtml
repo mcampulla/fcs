@@ -1,0 +1,22 @@
+﻿@model fcs.web.Models.Articolo
+
+@{
+    ViewBag.Title = "ArticleDetail";
+}
+
+<section id="download" class="content-section text-center">
+    <div class="download-section">
+        <div class="container">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>@Html.DisplayFor(model => model.Titolo)</h2>
+
+                @Html.Partial("_article" + Model.TipoID, Model)
+                <br/>
+                <p class="text-left">
+                    @Html.ActionLink("Back to List", "ArticleList", new { categoryId = Model.CategoriaID})
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>

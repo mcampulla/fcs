@@ -1,0 +1,39 @@
+﻿@model IEnumerable<fcs.web.Models.Categoria>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Categorie";
+}
+
+<h2>Categorie</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CategoriaEdit")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titolo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsMain)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titolo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsMain)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "CategoriaEdit", new { id=item.CategoriaID }) 
+            @Html.ActionLink("Delete", "CategoriaDelete", new { id=item.CategoriaID })
+        </td>
+    </tr>
+}
+
+</table>

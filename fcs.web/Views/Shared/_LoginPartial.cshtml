@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        //aggiunte classi ee a ul;21-3-2017-A.Ziliani
+
+        <ul id="menu-menu" class="ee-navigation-menu primary nav navbar-nav navbar-right">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul id="menu-menu" class="ee-navigation-menu primary nav navbar-nav navbar-right">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+
