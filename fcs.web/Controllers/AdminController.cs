@@ -1,6 +1,8 @@
 ﻿using fcs.web.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -78,7 +80,7 @@ namespace fcs.web.Controllers
                 int id = agent.SaveArticolo(model);
                 return RedirectToAction("ArticoloEdit", new { id = id });
             }
-            return View();
+            return View(model);
         }
 
         public ActionResult ArticoloDelete(int id)
@@ -86,6 +88,56 @@ namespace fcs.web.Controllers
             Articolo model = agent.GetArticolo(id);
             agent.DeleteArticolo(model);
             return RedirectToAction("Articoli");
+        }
+
+        #endregion
+
+        #region utility
+
+        public ActionResult CloseFancybox()
+        {
+            return View();
+        }        
+
+        [HttpPost]
+        public ActionResult UploadFile()
+        {
+            string uploadpath = ConfigurationManager.AppSettings["UploadPath"];
+            HttpPostedFile file1 = System.Web.HttpContext.Current.Request.Files[0];
+            string url = string.Empty;
+            string foldername = string.Empty;
+
+            if (file1 != null)
+            {
+                string filename = string.Format("{0}_{1}", DateTime.Now.ToString("yyyyMMdd-HHmmss"), System.IO.Path.GetFileName(file1.FileName));
+                url = string.Format(uploadpath + "/{1}", DateTime.Now.Year, filename);
+                foldername = Server.MapPath(string.Format(uploadpath, DateTime.Now.Year));
+
+                if (!System.IO.Directory.Exists(foldername))
+                    System.IO.Directory.CreateDirectory(foldername);
+
+                string path = System.IO.Path.Combine(foldername, filename);
+                // file is uploaded
+                file1.SaveAs(path);
+
+                // save the image path path to the database or you can send image directly to database
+                // in-case if you want to store byte[] ie. for DB
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    file1.InputStream.CopyTo(ms);
+                    byte[] array = ms.GetBuffer();
+                }
+            }
+
+            return Json(new
+            {
+                files = new[] {
+                    new {name = file1.FileName, size = file1.ContentLength, url = url}
+                }
+                //new {name = "picture2.jpg", size = 902604, url = @"http://example.org/files/picture2.jpg", 
+                //thumbnailUrl = @"http://example.org/files/thumbnail/picture2.jpg", deleteUrl = @"http://example.org/files/picture2.jpg", deleteType = "DELETE"}
+
+            });
         }
 
         #endregion

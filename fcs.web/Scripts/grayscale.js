@@ -35,28 +35,28 @@ $('.navbar-collapse ul li a').click(function() {
 // Google Maps Scripts
 var map = null;
 // When the window has finished loading create our google map below
-//google.maps.event.addDomListener(window, 'load', init);
-//google.maps.event.addDomListener(window, 'resize', function() {
-//    map.setCenter(new google.maps.LatLng(40.6700, -73.9400));
-//});
+google.maps.event.addDomListener(window, 'load', init);
+google.maps.event.addDomListener(window, 'resize', function() {
+    map.setCenter(new google.maps.LatLng(45.350359, 11.780181));
+});
 
 function init() {
     // Basic options for a simple Google Map
     // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
     var mapOptions = {
         // How zoomed in you want the map to start at (always required)
-        zoom: 15,
+        zoom: 16,
 
         // The latitude and longitude to center the map (always required)
-        center: new google.maps.LatLng(40.6700, -73.9400), // New York
+        center: new google.maps.LatLng(45.350359, 11.780181), // New York
 
         // Disables the default Google Maps UI components
         disableDefaultUI: true,
         scrollwheel: false,
         draggable: false,
 
-        // How you would like to style the map.
-        // This is where you would paste any style found on Snazzy Maps.
+         //How you would like to style the map.
+         //This is where you would paste any style found on Snazzy Maps.
         styles: [{
             "featureType": "water",
             "elementType": "geometry",
@@ -175,11 +175,11 @@ function init() {
     map = new google.maps.Map(mapElement, mapOptions);
 
     // Custom Map Marker Icon - Customize the map-marker.png file to customize your icon
-    var image = 'content/img/map-marker.png';
-    var myLatLng = new google.maps.LatLng(40.6700, -73.9400);
+    //var image = 'content/img/map-marker.png';
+    var myLatLng = new google.maps.LatLng(45.350359, 11.780181);
     var beachMarker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        icon: image
+        //icon: image
     });
 }

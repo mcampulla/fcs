@@ -16,15 +16,23 @@ namespace fcs.web.Models
         public int TipoID { get; set; }
         public string Titolo { get; set; }
         public string Abstract { get; set; }
+        [DataType("Date")]
         public DateTime Data { get; set; }
         public int Stato { get; set; }
         public string Body { get; set; }
+        [DataType("Foto")]
         public string ImmagineHome { get; set; }
+        [DataType("Foto")]
         public string ImmagineLista { get; set; }
+        [DataType("Foto")]
         public string Immagine1 { get; set; }
+        [DataType("Foto")]
         public string Immagine2 { get; set; }
+        [DataType("Foto")]
         public string Immagine3 { get; set; }
+        [DataType("Foto")]
         public string Immagine4 { get; set; }
+        [DataType("Foto")]
         public string Immagine5 { get; set; }
         public string Sezione1 { get; set; }
         public string Sezione2 { get; set; }
