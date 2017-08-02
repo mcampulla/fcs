@@ -15,9 +15,14 @@ namespace fcs.web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.Cats = db.Categorie.Where(c => c.IsMain != 1).ToList();
+            ViewBag.Cats = db.Categorie.ToList(); // .Where(c => c.IsMain != 1).ToList();
             var model = db.Categorie.Where(c => c.IsMain == 1).ToList();
             return View(model);
+        }
+
+        public ActionResult Index2()
+        {           
+            return View();
         }
 
         public ActionResult CategoryList()
