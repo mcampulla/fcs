@@ -429,6 +429,8 @@
     <Content Include="Views\Shared\EditorTemplates\TimeSpan.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Shared\_Test.cshtml" />
+    <None Include="Properties\PublishProfiles\fcsmcampulla - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\fcsmcampulla - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
